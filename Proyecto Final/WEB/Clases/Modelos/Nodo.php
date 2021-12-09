@@ -16,5 +16,14 @@
         public function getId():?int{
             return $this->id;
         }
+        public function toAssociativeArray():array{
+            $retorno = array();
+            $retorno["id"] = $this->id;
+            $retorno["numero"] = $this->numero;
+            $retorno["ip"] = $this->ip;
+            $retorno["dominio"] = $this->dominio;
+            $retorno["nombre"] = $this->nombre;
+            return $retorno;
+        }
     }
 ?>

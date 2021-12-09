@@ -29,5 +29,12 @@
         public function setNombre(string $nombre):void{
             $this->nombre = $nombre;
         }
+        public function toAssociativeArray():array{
+            $retorno = array();
+            $retorno["id"] = $this->id;
+            $retorno["extension"] = $this->extension;
+            $retorno["nombre"] = $this->nombre;
+            return $retorno;
+        }
     }
 ?>

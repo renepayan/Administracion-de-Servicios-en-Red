@@ -102,5 +102,20 @@
         public function setGrupo(Grupo $grupo):void{
             $this->grupo = $grupo;
         }
+        public function toAssociativeArray():array{
+            $retorno = array();
+            $retorno["id"] = $this->id;
+            $retorno["nombre"] = $this->nombre;
+            $retorno["password"] = $this->password;
+            $retorno["usuario"] = $this->usuario;
+            $retorno["nivel"] = $this->nivel;
+            $retorno["grupo"] = $this->grupo->toAssociativeArray();
+            $retorno["nodo"] = $this->nodo->toAssociativeArray();
+            $retorno["grabarLlamadas"] = $this->grabarLlamadas;
+            $retorno["llamarAGrupos"] = $this->llamarAGrupos;
+            $retorno["llamarExtensiones"] = $this->llamarExtensiones;
+            $retorno["extension"] = $this->extensiones;
+            return $retorno;
+        }
     }
 ?>

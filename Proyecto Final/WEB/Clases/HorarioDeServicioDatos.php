@@ -1,6 +1,8 @@
 <?php
     namespace PBX;
     require_once 'Modelos/HorarioDeServicio.php';
+    require_once 'Modelos/Usuario.php';
+    require_once 'UsuarioDatos.php';
     class HorarioDeServicioDatos{
         public static function addHorarioDeServicio($conexion, Modelos\HorarioDeServicio $horarioDeServicio):bool{
             $retorno = false;
@@ -15,6 +17,41 @@
                 $pstmInsert->close();
                 $horarioDeServicio->setId($idHorarioDeServicio);
                 $retorno = true;
+            }
+            return $retorno;
+        }
+        public static function getHorarioDeServicioById($conexion, int $id):?Modelos\HorarioDeServicio{
+            $retorno = null;
+            if($pstmSelect = $conexion->prepare("SELECT Usuario,DiaDeLaSemana,HoraInicio,HoraFin FROM tbl_HorariosDeServicios WHERE idHorarioDeServicio = ? LIMIT 1")){
+                $pstmSelect->bind_param("i",$id);
+                $pstmSelect->execute();
+                $pstmSelect->bind_result($idUsuario,$diaDeLaSemana,$horaInicio,$horaFin);
+                $sePuede = false;
+                if($pstmSelect->fetch()){
+                    $sePuede = true;
+                }
+                $pstmSelect->close();
+                if($sePuede){
+                    $retorno = new Modelos\HorarioDeServicio($id,UsuarioDatos::getUsuarioById($idUsuario,$conexion), $diaDeLaSemana, new \DateTime($horaInicio), new \DateTime($horaFin));
+                }
+            }
+            return $retorno;
+        }
+        public static function getHorariosDeServicioByUsuario($conexion, Modelos\Usuario $usuario):array{
+            $retorno = array();
+            if($pstmSelect = $conexion->prepare("SELECT idHorarioServicio FROM tbl_HorariosDeServicios WHERE Usuario = ?")){
+                $idUsuario = $usuario->getId();
+                $arrayIDs = array();
+                $pstmSelect->bind_param("i",$idUsuario);
+                $pstmSelect->execute();
+                $pstmSelect->bind_result($idHorario);
+                while($pstmSelect->fetch()){
+                    $arrayIDs[] = $idHorario;
+                }
+                $pstmSelect->close();
+                for($i = 0; $i < count($arrayIDs); $i++){
+                    $retorno[] = HorariosDeServicioDatos::getHorarioDeServicioById($conexion, $arrayIDs[$i]);
+                }
             }
             return $retorno;
         }
