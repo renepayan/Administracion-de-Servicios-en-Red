@@ -78,7 +78,7 @@
         public function isLlamarAGrupos():bool{
             return $this->llamarAGrupos;
         }
-        public function setGrabarLlamadas(bool $llamarAGrupos):void{
+        public function setLlamarAGrupos(bool $llamarAGrupos):void{
             $this->llamarAGrupos = $llamarAGrupos;
         }
 
