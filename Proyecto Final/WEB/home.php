@@ -73,6 +73,38 @@
                     </table>
                 </div>
             </div>
+            <div>
+                Llamadas:
+                <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha de inicio:</th>
+                                <th>Fecha de fin:</th>
+                                <th>Nodo de origen:</th>
+                                <th>Nodo de destino:</th>
+                                <th>Telefono:</th>
+                                <th>Costo:</th>
+                                <th>Grabacion:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="llamada in llamadas">
+                                <td>{{llamada.fechaInicio}}</td>
+                                <td>{{llamada.fechaFin}}</td>
+                                <td>{{llamada.nodoOrigen.nombre}}</td>
+                                <td>{{llamada.nodoDestino.nombre}}</td>                                
+                                <td>{{llamada.telefono}}</td>
+                                <td>$0.00</td>
+                                <td v-if="llamada.grabada">
+                                    <a v-bind:href="'https://'+llamada.nodoOrigen.url+'/grabaciones/'+llamada.idAsterisk+'.wav'">Descargar</a>
+                                </td>
+                                <td v-else>
+                                    No grabada
+                                </td>                                
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
         </div>
         <script>
             var app = new Vue({
@@ -108,6 +140,20 @@
                         nodoDestino:{
                             nombre:""
                         }
+                    }],
+                    llamadas:[{
+                        id:0,
+                        nodoOrigen:{
+                            nombre:""
+                        },
+                        nodoDestino:{
+                            nombre:""
+                        },
+                        fechaInicio:"",
+                        fechaFin:"",
+                        telefono:"",
+                        grabada:false,
+                        idAsterisk:""
                     }]
                 },
                 methods:{
