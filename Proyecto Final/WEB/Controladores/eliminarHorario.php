@@ -28,7 +28,7 @@
                 $sal["Estado"] = "error";
                 $sal["Descripcion"] = "El horario no existe";
             }else{
-                if(!PBX\HorarioDeServicioDatos::deleteHorarioServicio($conexion, $horario)){
+                if(!PBX\HorarioDeServicioDatos::deleteHorarioDeServicio($conexion, $horario)){
                     $sal["Estado"] = "error";
                     $sal["Descripcion"] = "Error al eliminar el horario en la base de datos";
                 }else{
