@@ -13,5 +13,8 @@
             $this->dominio = $dominio;
             $this->nombre = $nombre;
         }
+        public function getId():?int{
+            return $this->id;
+        }
     }
 ?>
