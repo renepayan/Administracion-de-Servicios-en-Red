@@ -21,6 +21,19 @@
             }
             return $retorno;
         }
+        public static function deletePermisoLlamada($conexion, Modelos\PermisoLlamada $permisoDeLlamada):bool{
+            $retorno = false;
+            if($pstmInsert = $conexion->prepare("DELETE FROM tbl_PermisosLlamadas WHERE idPermiso = ? LIMIT 1")){
+                $id = $permisoDeLlamada->getId();
+                $pstmInsert->bind_param("i",$id);
+                $pstmInsert->execute();                                
+                $pstmInsert->close();
+                $retorno = true;
+            }else{
+                echo($conexion->error);
+            }
+            return $retorno;
+        }
         public static function getPermisoLlamadaById($conexion, int $id):?Modelos\PermisoLlamada{
             if($pstmSelect = $conexion->prepare("SELECT Usuario,NodoOrigen,NodoDestino FROM tbl_PermisosLlamadas WHERE idPermiso = ? LIMIT 1")){
                 $pstmSelect->bind_param("i",$id);
