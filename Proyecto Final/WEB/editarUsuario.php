@@ -144,11 +144,45 @@
                     }                  
                 },
                 methods:{
+                    guardarDatos: function(){
+
+                    },
                     eliminarPermiso: function(permiso){
+                        const params = new URLSearchParams();
+                        params.append('idPermiso', permiso);                        
+                        axios({
+                            method:"POST",
+                            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                            data: params,
+                            url: '/Controladores/eliminarPermiso.php'})
+                        .then(function (response) {
+                            if(response.data.Estado === "ok")
+                                app.cargarInformacion();
+                            else
+                                alert(response.data.Descripcion);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
 
                     },
                     eliminarHorario: function(horario){
-
+                        const params = new URLSearchParams();
+                        params.append('idHorario', horario);                                             
+                        axios({
+                            method:"POST",
+                            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                            data: params,
+                            url: '/Controladores/eliminarHorario.php'})
+                        .then(function (response) {
+                            if(response.data.Estado === "ok")
+                                app.cargarInformacion();
+                            else
+                                alert(response.data.Descripcion);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                     },
                     agregarHorario: function(){
 

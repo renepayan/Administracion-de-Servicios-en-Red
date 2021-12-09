@@ -40,7 +40,10 @@
                             data: params,
                             url: '/Controladores/agregarUsuario.php'})
                         .then(function (response) {
-                            console.log(response);
+                            if(response.data.Estado === "ok")
+                                window.location.replace("home.php");
+                            else
+                                alert(response.data.Descripcion);
                         })
                         .catch(function (error) {
                             console.log(error);
