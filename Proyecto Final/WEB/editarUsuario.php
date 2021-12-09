@@ -184,7 +184,25 @@
                         });
                     },
                     agregarHorario: function(){
-
+                        const params = new URLSearchParams();
+                        params.append('diaDeLaSemana', this.nuevoHorario.diaDeLaSemana);
+                        params.append('horaInicio', this.nuevoHorario.horaInicio);
+                        params.append('horaFin', this.nuevoHorario.horaInicio);
+                        params.append('idUsuario', this.usuario.id);                        
+                        axios({
+                            method:"POST",
+                            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                            data: params,
+                            url: '/Controladores/agregarHorario.php'})
+                        .then(function (response) {
+                            if(response.data.Estado === "ok")
+                                app.cargarInformacion();
+                            else
+                                alert(response.data.Descripcion);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                     },
                     agregarPermiso: function(){
                         const params = new URLSearchParams();
