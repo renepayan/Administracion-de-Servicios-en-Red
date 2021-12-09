@@ -42,7 +42,7 @@
                         $sal["Descripcion"] = "El usuario no existe";
                     }else{
                         $nuevoPermiso = new PBX\Modelos\PermisoLlamada(null,$usuario,$nodoOrigen,$nodoDestino);
-                        if(!PBX\PermisoLlamadaDatos::addPermisoLlamada($conexon,$nuevoPermiso)){
+                        if(!PBX\PermisoLlamadaDatos::addPermisoLlamada($conexion,$nuevoPermiso)){
                             $sal["Estado"] = "error";
                             $sal["Descripcion"] = "Error al insertar el nuevo permiso en la base de datos";
                         }else{
