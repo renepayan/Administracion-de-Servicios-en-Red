@@ -94,7 +94,9 @@
                 $idUsuario = $pstmInsert->insert_id;
                 $pstmInsert->close();
                 $usuario->setId($idUsuario);
-            }            
+            }else{
+                echo($conexion->error);
+            }          
             return $retorno;
         }
     }
