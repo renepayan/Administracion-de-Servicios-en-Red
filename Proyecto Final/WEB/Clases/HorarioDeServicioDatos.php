@@ -22,7 +22,7 @@
         }
         public static function getHorarioDeServicioById($conexion, int $id):?Modelos\HorarioDeServicio{
             $retorno = null;
-            if($pstmSelect = $conexion->prepare("SELECT Usuario,DiaDeLaSemana,HoraInicio,HoraFin FROM tbl_HorariosDeServicios WHERE idHorarioDeServicio = ? LIMIT 1")){
+            if($pstmSelect = $conexion->prepare("SELECT Usuario,DiaDeLaSemana,HoraInicio,HoraFin FROM tbl_HorariosDeServicios WHERE idHorario = ? LIMIT 1")){
                 $pstmSelect->bind_param("i",$id);
                 $pstmSelect->execute();
                 $pstmSelect->bind_result($idUsuario,$diaDeLaSemana,$horaInicio,$horaFin);
@@ -39,7 +39,7 @@
         }
         public static function getHorariosDeServicioByUsuario($conexion, Modelos\Usuario $usuario):array{
             $retorno = array();
-            if($pstmSelect = $conexion->prepare("SELECT idHorarioServicio FROM tbl_HorariosDeServicios WHERE Usuario = ?")){
+            if($pstmSelect = $conexion->prepare("SELECT idHorario FROM tbl_HorariosDeServicios WHERE Usuario = ?")){
                 $idUsuario = $usuario->getId();
                 $arrayIDs = array();
                 $pstmSelect->bind_param("i",$idUsuario);
