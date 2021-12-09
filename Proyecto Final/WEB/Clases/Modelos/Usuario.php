@@ -105,7 +105,7 @@
         public function toAssociativeArray():array{
             $retorno = array();
             $retorno["id"] = $this->id;
-            $retorno["nombre"] = $this->nombre;
+            $retorno["nombre"] = utf8_encode($this->nombre);
             $retorno["password"] = $this->password;
             $retorno["usuario"] = $this->usuario;
             $retorno["nivel"] = $this->nivel;
