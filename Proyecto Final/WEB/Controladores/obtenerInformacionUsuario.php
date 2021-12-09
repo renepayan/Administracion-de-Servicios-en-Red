@@ -27,7 +27,7 @@
                 $sal["Estado"] = "error";
                 $sal["Descripcion"] = "No tiene los permisos necesarios para obtener esa informacion";                  
             }else{
-                $usuario = PBX\UsuarioDatos::getUsuarioById($conexion,usuarioABuscar);
+                $usuario = PBX\UsuarioDatos::getUsuarioById($conexion,$usuarioABuscar);
                 if($usuario == null){
                     $sal["Estado"] = "error";
                     $sal["Descripcion"] = "El usuario no existe";            
