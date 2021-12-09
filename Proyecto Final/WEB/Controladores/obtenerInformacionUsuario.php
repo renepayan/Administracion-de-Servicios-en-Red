@@ -30,7 +30,7 @@
                 $sal["Permisos"][] = $permisos[$i]->toAssociativeArray();
             }
             $sal["Horarios"] = array();
-            $horarios = PBX\HorariosDeServicioDatos::getHorariosDeServicioByUsuario($conexion,$usuario);
+            $horarios = PBX\HorarioDeServicioDatos::getHorariosDeServicioByUsuario($conexion,$usuario);
             for($i = 0;$i < count($horarios); $i++){
                 $sal["Horarios"][] = $horarios[$i]->toAssociativeArray();
             }
