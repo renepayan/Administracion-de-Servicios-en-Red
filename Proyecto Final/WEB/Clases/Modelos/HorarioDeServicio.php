@@ -7,7 +7,7 @@
         private int $diaDeLaSemana;
         private \DateTime $horaInicio;
         private \DateTime $horaFin;
-        public function __construct(?int $id, Usuario $usuario, int $diaDeLaSemana, \DateTime $horaInicio \DateTime $horaFin){
+        public function __construct(?int $id, Usuario $usuario, int $diaDeLaSemana, DateTime $horaInicio DateTime $horaFin){
             $this->id = $id;
             $this->usuario = $usuario;
             $this->diaDeLaSemana = $diaDeLaSemana;
