@@ -38,11 +38,11 @@
                             url: '/Controladores/login.php'})
                         .then(function (response) {
                             console.log(response);
-                            let respuesta = JSON.parse(response.data);
-                            if(respuesta.Estado === "ok"){
+                            //let respuesta = JSON.parse(response.data);
+                            if(response.data.Estado === "ok"){
                                 window.location.replace("home.php");
                             }else{
-                                alert(respuesta.Descripcion);
+                                alert(response.data.Descripcion);
                             }
                         })
                         .catch(function (error) {
