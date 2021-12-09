@@ -1,7 +1,7 @@
 <?php
     namespace PBX;
     require_once 'Modelos/Grupo.php';
-    class NodoDatos{
+    class GrupoDatos{
         public static function getGrupoById($conexion, int $id):?Nodo{
             $retorno = null;
             if($pstmSelect = $conexion->prepare("SELECT idGrupo, Extension, Nombre FROM tbl_Grupos WHERE idGrupo = ?")){
