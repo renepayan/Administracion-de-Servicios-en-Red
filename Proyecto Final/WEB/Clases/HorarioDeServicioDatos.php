@@ -49,6 +49,7 @@
                     $arrayIDs[] = $idHorario;
                 }
                 $pstmSelect->close();
+                print_r($arrayIDs);
                 for($i = 0; $i < count($arrayIDs); $i++){
                     $retorno[] = HorarioDeServicioDatos::getHorarioDeServicioById($conexion, $arrayIDs[$i]);
                 }
