@@ -43,6 +43,7 @@ CREATE TABLE tbl_PermisosLlamadas(
     Usuario INT NOT NULL,
     NodoOrigen INT NOT NULL,
     NodoDestino INT NOT NULL,
+    FOREIGN KEY (Usuario) REFERENCES tbl_Usuarios(idUsuario),
     FOREIGN KEY (NodoOrigen) REFERENCES tbl_Nodos(idNodo),
     FOREIGN KEY (NodoDestino) REFERENCES tbl_Nodos(idNodo)
 );

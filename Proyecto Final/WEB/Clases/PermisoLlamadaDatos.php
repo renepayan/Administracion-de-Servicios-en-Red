@@ -13,6 +13,9 @@
                 $idPermisoLlamada = $pstmInsert->insert_id;
                 $pstmInsert->close();
                 $permisoDeLlamada->setId($idPermisoLlamada);
+                $retorno = true;
+            }else{
+                echo($conexion->error);
             }
             return $retorno;
         }
