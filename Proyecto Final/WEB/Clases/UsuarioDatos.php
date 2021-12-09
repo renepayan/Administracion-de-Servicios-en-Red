@@ -92,7 +92,7 @@
                 $nombre = $usuario->getNombre();
                 $usuario = $usuario->getUsuario();
                 
-                $pstmInsert->bind_param("sssiibbbsi",clone $usuario->getNombre(), clone $usuario->getUsuario(), clone $usuario->getPassword(), clone $usuario->getNivel(), clone $usuario->getGrupo()->getId(), clone $usuario->isLlamarAGrupos(), clone $usuario->isLlamarExtensiones(), clone $usuario->getExtension(), clone $usuario->getNodo()->getId());
+                $pstmInsert->bind_param("sssiibbbsi",$nombre, clone $usuario->getUsuario(), clone $usuario->getPassword(), clone $usuario->getNivel(), clone $usuario->getGrupo()->getId(), clone $usuario->isLlamarAGrupos(), clone $usuario->isLlamarExtensiones(), clone $usuario->getExtension(), clone $usuario->getNodo()->getId());
                 $pstmInsert->execute();        
                 $idUsuario = $pstmInsert->insert_id;
                 $pstmInsert->close();
