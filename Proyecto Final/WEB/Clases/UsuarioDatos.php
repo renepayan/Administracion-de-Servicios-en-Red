@@ -110,5 +110,21 @@
             }
             return $retorno;
         }
+        public static function getAllUsuarios($conexion):array{
+            $retorno = array();
+            if($pstmSelect = $conexion->prepare("SELECT idUsuario from tbl_Usuarios")){                
+                $ids = array();
+                $pstmSelect->execute();
+                $pstmSelect->bind_result($idUsuario);
+                if($pstmSelect->fetch()){
+                    $ids[] = $idUsuario;
+                }                
+                $pstmSelect->close();
+                for($i = 0; $i < count($ids);$i++){
+                    $retorno[] = UsuarioDatos::getUsuarioById($conexion, $ids[$i]);
+                }
+            }            
+            return $retorno;
+        }
     }
 ?>
