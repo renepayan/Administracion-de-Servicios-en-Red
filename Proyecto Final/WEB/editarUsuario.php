@@ -30,7 +30,7 @@
                     Nodo:<input type="text" v-model="usuario.nodo.id"></br>
                     Grupo:<input type="text" v-model="usuario.grupo.id"></br>
                 </div>
-                <button v-on:click="guardarDatos()">Guardar</button>               
+                <button v-on:click="guardarDatos()">Guardar</button></br>             
                 <a href="home.php">Ver llamadas</a></br>
             </div>
             <div v-if="puedeEditar">
@@ -38,7 +38,7 @@
                 <a href="listaNodos.php">Ver Nodos</a></br>
                 <a href="listaGrupos.php">Ver Grupos</a></br>                
             </div>
-            <div v-else>
+            <div>
                 <div>
                     Horarios de servicio:<br>
                     <table>
@@ -64,7 +64,7 @@
                         Dia de la semana:<input type="number" v-model="nuevoHorario.diaDeLaSemana"><br>
                         Hora de inicio:<input type="text" v-model="nuevoHorario.horaInicio"><br>
                         Hora de fin:<input type="text" v-model="nuevoHorario.horaFin"><br>
-                        <button v-on:click="agregarHorario()">Guardar</button><br>
+                        <button v-on:click="agregarHorario()">Guardar</button></br>
                     </div>
                 </div>
                 <div>
