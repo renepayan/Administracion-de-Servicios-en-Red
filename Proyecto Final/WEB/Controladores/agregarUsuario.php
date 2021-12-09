@@ -17,7 +17,7 @@
     $conexion = new mysqli(HOST_DB, USUARIO_DB, PASSWORD_DB, NOMBRE_DB);
     $usuario = $_POST["usuario"];
     $password = $_POST["password"];
-    $nombre = utf8_encode($_POST["nombre"]);
+    $nombre = utf8_decode($_POST["nombre"]);
     $sal = array();
     if(empty($_SESSION["usuario"])){
         if(PBX\UsuarioDatos::getUsuarioByNombreDeUsuario($conexion, $usuario) != null){
