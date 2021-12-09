@@ -1,6 +1,6 @@
 <?php
     namespace PBX;
-    require_once 'Modelos\HorarioDeServicio.php';
+    require_once 'Modelos/HorarioDeServicio.php';
     class HorarioDeServicioDatos{
         public static function addHorarioDeServicio($conexion, Modelos\HorarioDeServicio $horarioDeServicio):bool{
             $retorno = false;
