@@ -37,7 +37,7 @@
             }
             return $retorno;
         }
-        public static function getPermisoLlamadaByUsuario($conexion, Modelos\Usuario $usuario):array{
+        public static function getPermisosLlamadaByUsuario($conexion, Modelos\Usuario $usuario):array{
             $retorno = array();
             if($pstmSelect = $conexion->prepare("SELECT idPermiso FROM tbl_PermisosLlamadas WHERE Usuario = ?")){
                 $idUsuario = $usuario->getId();
