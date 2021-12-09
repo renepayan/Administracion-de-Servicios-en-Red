@@ -14,6 +14,7 @@
         $usuarioEnSistema = PBX\UsuarioDatos::getUsuarioByUsuarioAndPassword($conexion, $usuario, $password);
         if($usuarioEnSistema == null){
             $sal["Estado"] = "error";
+            $sal["Descripcion"] = "Usuario no encontrado o contraseña incorrecta";
         }else{
             $sal["Estado"] = "ok";
             $_SESSION["Usuario"] = $usuarioEnSistema->getId();
