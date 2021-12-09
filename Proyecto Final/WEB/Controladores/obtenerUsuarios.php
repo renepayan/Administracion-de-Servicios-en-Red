@@ -31,7 +31,7 @@
                 $sal["Estado"] = "ok";
                 $sal["Usuarios"] = array();
                 $usuarios = PBX\UsuarioDatos::getAllUsuarios($conexion);
-                for($i = 0;$i < count($usuario); $i++){
+                for($i = 0;$i < count($usuarios); $i++){
                     $sal["Usuarios"][] = $usuarios[$i]->toAssociativeArray();
                 }
             }
