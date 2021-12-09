@@ -50,7 +50,7 @@
                 }
                 $pstmSelect->close();
                 for($i = 0; $i < count($arrayIDs); $i++){
-                    $retorno[] = HorariosDeServicioDatos::getHorarioDeServicioById($conexion, $arrayIDs[$i]);
+                    $retorno[] = HorarioDeServicioDatos::getHorarioDeServicioById($conexion, $arrayIDs[$i]);
                 }
             }
             return $retorno;
