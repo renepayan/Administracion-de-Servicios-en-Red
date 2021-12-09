@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if($_SESSION["usuario"]){
+    if(!empty($_SESSION["usuario"])){
         header('Location: home.php');
     }    
 ?>
@@ -37,7 +37,12 @@
                             data: params,
                             url: '/Controladores/login.php'})
                         .then(function (response) {
-                            console.log(response);
+                            let respuesta = JSON.parse(response);
+                            if(respuesta.Estado === "ok"){
+                                window.location.replace("home.php");
+                            }else{
+                                alert(respuesta.Descripcion);
+                            }
                         })
                         .catch(function (error) {
                             console.log(error);
