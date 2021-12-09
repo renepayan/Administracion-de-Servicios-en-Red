@@ -114,7 +114,13 @@
                     cargarInformacion: function(){
                         axios.get("/Controladores/obtenerInformacionUsuario.php")
                         .then(function(response){
-                            console.log(response);
+                            if(response.data.Estado === "ok"){
+                                app.usuario = response.data.Usuario;
+                                app.horariosDeServicio = response.data.Horarios;
+                                app.permisos = response.data.Permisos;
+                            }else{
+                                alert(response.data.Descripcion);
+                            }
                         })
                         .catch(function(error){
                             console.log(error);
