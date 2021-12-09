@@ -19,5 +19,21 @@
             }
             return $retorno;
         }
+        public static function getNodoAleatorio($conexion):?Nodo{
+            $retorno = null;
+            if($pstmSelect = $conexion->prepare("SELECT idNodo FROM tbl_Nodos ORDER BY RAND() LIMIT 1")){
+                $pstmSelect->execute();
+                $pstmSelect->bind_result($idNodo);
+                $sePuede = false;
+                if($pstmSelect->fetch()){
+                    $sePuede = true;
+                }                                
+                $pstmSelect->close();
+                if($sePuede){
+                    $retorno = NodoDatos::getNodoById($idNodo, $conexion);
+                }
+            }
+            return $retorno;
+        }
     }
 ?>

@@ -9,24 +9,34 @@
     $nombre = $_POST["nombre"];
     $sal = array();
     if(empty($_SESSION["usuario"])){
-        $nodoDelUsuarioARegistrar = NodoDatos::getNodoAleatorio($conexion);
-        $grupoDelUsuarioARegistrar = GrupoDatos::getGrupoAleatorio($conexion);
-        $extension = UsuarioDatos::getLastExtension($conexion);
-        $extension = (intval($extension)+1)."";        
-        $usuarioNuevo = new Usuario(
-            null,
-            $nombre,
-            $usuario,
-            0,
-            $grupoDelUsuarioARegistrar,
-            false,
-            true,
-            true,
-            $extension,
-            $nodoDelUsuarioARegistrar
-        );
-        $_SESSION["usuario"] = $nuevoUsuario->getId();
-        $sal["Estado"] = "ok";
+        if(UsuarioDatos::getUsuarioByNombreDeUsuario($conexion, $usuario) != null){
+            $sal["Estado"] = "error";
+            $sal["Detalle"] = "El nombre de usuario ya esta registrado";
+        }else{
+            $nodoDelUsuarioARegistrar = NodoDatos::getNodoAleatorio($conexion);
+            $grupoDelUsuarioARegistrar = GrupoDatos::getGrupoAleatorio($conexion);
+            $extension = UsuarioDatos::getLastExtension($conexion);
+            $extension = (intval($extension)+1)."";        
+            $usuarioNuevo = new Usuario(
+                null,
+                $nombre,
+                $usuario,
+                0,
+                $grupoDelUsuarioARegistrar,
+                false,
+                true,
+                true,
+                $extension,
+                $nodoDelUsuarioARegistrar
+            );
+            if(UsuarioDatos::agregarUsuario($conexion, $usuarioNuevo)){                                    
+                $sal["Estado"] = "ok";                                    
+                $_SESSION["usuario"] = $nuevoUsuario->getId();
+            }else{
+                $sal["Estado"] = "error";
+                $sal["Descripcion"] = "Error al insertar en la base de datos";
+            }                        
+        }
     }else{
         $idUsuarioEnSesion = $_SESSION["usuario"];
         $usuarioEnSesion = UsuarioDatos::getUsuarioById($conexion, $idUsuarioEnSesion);

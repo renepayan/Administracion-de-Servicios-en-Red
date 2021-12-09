@@ -8,7 +8,19 @@
     class UsuarioDatos{
         public static function getUsuarioByNombreDeUsuario($conexion, string $nombreDeUsuario):?Usaurio{
             $retorno = null;
-            
+            if($pstmSelect = $conexion->prepare("SELECT idUsuario from tbl_Usuarios WHERE Usuario = ? LIMIT 1")){
+                $pstmSelect->bind_param("s",$usuario);
+                $id = -1;
+                $pstmSelect->execute();
+                $pstmSelect->bind_result($idUsuario);
+                if($pstmSelect->fetch()){
+                    $id = $idUsuario;
+                }                
+                $pstmSelect->close();
+                if($id>0){
+                    $retorno = UsuarioDatos::getUsuarioById($conexion, $id);
+                }
+            }            
             return $retorno;
         }
         public static function getUsuarioById($conexion, int $id):?Usuario{
@@ -29,8 +41,33 @@
             return $retorno;
         }
         public static function getUsuarioByExtension($conexion, string $extension):?Usuario{
+            $retorno = null;
+            if($pstmSelect = $conexion->prepare("SELECT idUsuario from tbl_Usuarios WHERE Extension = ? LIMIT 1")){
+                $pstmSelect->bind_param("s",$extension);
+                $id = -1;
+                $pstmSelect->execute();
+                $pstmSelect->bind_result($idUsuario);
+                if($pstmSelect->fetch()){
+                    $id = $idUsuario;
+                }                
+                $pstmSelect->close();
+                if($id>0){
+                    $retorno = UsuarioDatos::getUsuarioById($conexion, $id);
+                }
+            }            
+            return $retorno;
         }
-        public static function getLastExtension($conexion):?Usuario{
+        public static function getLastExtension($conexion):string{
+            $retorno = "100";
+            if($pstmSelect = $conexion->prepare("SELECT Extension from tbl_Usuarios ORDER BY Extension DESC LIMIT 1")){                
+                $pstmSelect->execute();
+                $pstmSelect->bind_result($extension);
+                if($pstmSelect->fetch()){
+                    $retorno = $extension;
+                }                
+                $pstmSelect->close();              
+            }            
+            return $retorno;
         }
         public static function getUsuarioByUsuarioAndPassword($conexion, string $usuario, string $password):?Usuario{
             $retorno = null;
