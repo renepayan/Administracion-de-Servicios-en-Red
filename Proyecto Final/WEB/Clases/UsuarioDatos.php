@@ -25,9 +25,6 @@
                 if($sePuede){
                     $retorno = new Usuario($idUsuario, $nombre, $usuario, $password, $nivel, GrupoDatos::getGrupoById($conexion, $idGrupo), $grabarLlamadas, $llamarAGrupos, $llamarAExtensiones, $extension, NodoDatos::getNodoById($conexion, $idNodo));
                 }
-                if($id>0){
-                    $retorno = UsuarioDatos::getUsuarioById($conexion, $id);
-                }
             }   
             return $retorno;
         }
