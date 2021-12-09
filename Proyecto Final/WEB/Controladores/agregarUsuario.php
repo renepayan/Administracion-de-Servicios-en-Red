@@ -12,13 +12,13 @@
     $nombre = $_POST["nombre"];
     $sal = array();
     if(empty($_SESSION["usuario"])){
-        if(UsuarioDatos::getUsuarioByNombreDeUsuario($conexion, $usuario) != null){
+        if(PBX\UsuarioDatos::getUsuarioByNombreDeUsuario($conexion, $usuario) != null){
             $sal["Estado"] = "error";
             $sal["Detalle"] = "El nombre de usuario ya esta registrado";
         }else{
-            $nodoDelUsuarioARegistrar = NodoDatos::getNodoAleatorio($conexion);
-            $grupoDelUsuarioARegistrar = GrupoDatos::getGrupoAleatorio($conexion);
-            $extension = UsuarioDatos::getLastExtension($conexion);
+            $nodoDelUsuarioARegistrar = PBX\NodoDatos::getNodoAleatorio($conexion);
+            $grupoDelUsuarioARegistrar = PBX\GrupoDatos::getGrupoAleatorio($conexion);
+            $extension = PBX\UsuarioDatos::getLastExtension($conexion);
             $extension = (intval($extension)+1)."";        
             $usuarioNuevo = new Usuario(
                 null,
@@ -32,7 +32,7 @@
                 $extension,
                 $nodoDelUsuarioARegistrar
             );
-            if(UsuarioDatos::agregarUsuario($conexion, $usuarioNuevo)){                                    
+            if(PBX\UsuarioDatos::agregarUsuario($conexion, $usuarioNuevo)){                                    
                 $sal["Estado"] = "ok";                                    
                 $_SESSION["usuario"] = $nuevoUsuario->getId();
             }else{
@@ -42,7 +42,7 @@
         }
     }else{
         $idUsuarioEnSesion = $_SESSION["usuario"];
-        $usuarioEnSesion = UsuarioDatos::getUsuarioById($conexion, $idUsuarioEnSesion);
+        $usuarioEnSesion = PBX\UsuarioDatos::getUsuarioById($conexion, $idUsuarioEnSesion);
         if($usuarioEnSesion == null){
             session_destroy();
             $sal["Estado"] = "error";
@@ -52,21 +52,21 @@
                 $sal["Estado"] = "error";
                 $sal["Detalle"] = "El usuario no es administrador, no tiene permisos para registrar";
             }else{
-                $grupoDelUsuarioARegistrar = GrupoDatos::getGrupoById($conexion, $_POST["grupo"]);
+                $grupoDelUsuarioARegistrar = PBX\GrupoDatos::getGrupoById($conexion, $_POST["grupo"]);
                 if($grupoDelUsuarioARegistrar == null){ //El grupo no existe
                     $sal["Estado"] = "error";
                     $sal["Detalle"] = "El grupo no existe";
                 }else{
-                    $nodoDelUsuarioARegistrar = NodoDatos::getNodoById($conexion, $_POST["nodo"]);
+                    $nodoDelUsuarioARegistrar = PBX\NodoDatos::getNodoById($conexion, $_POST["nodo"]);
                     if($nodoDelUsuarioARegistrar == null){ //El nodo no existe
                         $sal["Estado"] = "error";
                         $sal["Detalle"] = "El nodo no existe";
                     }else{
-                        if(UsuarioDatos::getUsuarioByNombreDeUsuario($conexion, $usuario) != null){
+                        if(PBX\UsuarioDatos::getUsuarioByNombreDeUsuario($conexion, $usuario) != null){
                             $sal["Estado"] = "error";
                             $sal["Detalle"] = "El nombre de usuario ya esta registrado";
                         }else{
-                            if(UsuarioDatos::getUsuarioByExtension($conexion, $_POST["extension"]) != null){
+                            if(PBX\UsuarioDatos::getUsuarioByExtension($conexion, $_POST["extension"]) != null){
                                 $sal["Estado"] = "error";
                                 $sal["Detalle"] = "La extension ya esta en uso";
                             }else{
@@ -82,7 +82,7 @@
                                     $_POST["extension"],
                                     $nodoDelUsuarioARegistrar
                                 );
-                                if(UsuarioDatos::agregarUsuario($conexion, $usuarioNuevo)){                                    
+                                if(PBX\UsuarioDatos::agregarUsuario($conexion, $usuarioNuevo)){                                    
                                     $sal["Estado"] = "ok";                                    
                                 }else{
                                     $sal["Estado"] = "error";
