@@ -98,13 +98,15 @@
                 $llamarAExtensiones = $usuario->isLlamarExtensiones();
                 $extension = $usuario->getExtension();
                 $nodo = $usuario->getNodo()->getId();
-                $pstmInsert->bind_param("sssiiiiisi",$nombre, $usuarioSTR, $password, $nivel, $grupo, $llamarAGrupos, $llamarAExtensiones, $extension, $nodo);
+                $pstmInsert->bind_param("sssiiiisi",$nombre, $usuarioSTR, $password, $nivel, $grupo, $llamarAGrupos, $llamarAExtensiones, $extension, $nodo);
                 $pstmInsert->execute();        
                 $idUsuario = $pstmInsert->insert_id;
                 $pstmInsert->close();
                 $usuario->setId($idUsuario);
                 $retorno = true;
-            }        
+            }else{
+                echo($conexion->error);
+            }
             return $retorno;
         }
     }
