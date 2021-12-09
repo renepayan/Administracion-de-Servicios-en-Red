@@ -17,7 +17,7 @@
             $sal["Descripcion"] = "Usuario no encontrado o contraseña incorrecta";
         }else{
             $sal["Estado"] = "ok";
-            $_SESSION["Usuario"] = $usuarioEnSistema->getId();
+            $_SESSION["usuario"] = $usuarioEnSistema->getId();
         }
     }else{
         $sal["Estado"] = "error";
