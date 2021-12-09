@@ -55,7 +55,7 @@
                                 <td>{{horario.diaDeLaSemana}}</td>
                                 <td>{{horario.horaInicio}}</td>
                                 <td>{{horario.horaFin}}</td>
-                                <td v-if="puedeEditar"><a :href="eliminarHorario(horario.id)">Eliminar</a></td>     
+                                <td v-if="puedeEditar"><button v-on:click="eliminarHorario(horario.id)">Eliminar</button></td>     
                             </tr>
                         </tbody>
                     </table>
@@ -81,7 +81,7 @@
                             <tr v-for="permiso in permisos">
                                 <td>{{permiso.nodoOrigen.nombre}}</td>
                                 <td>{{permiso.nodoDestino.nombre}}</td>
-                                <td v-if="puedeEditar"><a :href="eliminarPermiso(permiso.id)">Eliminar</a></td>                                 
+                                <td v-if="puedeEditar"><button v-on:click="eliminarPermiso(permiso.id)">Eliminar</button></td>                                  
                             </tr>
                         </tbody>
                     </table>

@@ -23,7 +23,7 @@
             $sal["Estado"] = "error";
             $sal["Descripcion"] = "El usuario local no existe o no tiene los permisos";
         }else{
-            $horario = PBX\HorarioServicioDatos::getHorarioServicioById($conexion,$idHorario);
+            $horario = PBX\HorarioDeServicioDatos::getHorarioServicioById($conexion,$idHorario);
             if($horario == null){
                 $sal["Estado"] = "error";
                 $sal["Descripcion"] = "El horario no existe";
