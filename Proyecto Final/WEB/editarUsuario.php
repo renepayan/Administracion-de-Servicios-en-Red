@@ -144,24 +144,7 @@
                 },
                 methods:{
                     guardarDatos: function(){
-                        const params = new URLSearchParams();
-                        params.append('idNodoOrigen', this.nuevoPermiso.nodoOrigen);                        
-                        params.append('idNodoDestino', this.nuevoPermiso.nodoDestino);
-                        params.append('idUsuario', this.usuario.id);                        
-                        axios({
-                            method:"POST",
-                            headers: { 'content-type': 'application/x-www-form-urlencoded' },
-                            data: params,
-                            url: '/Controladores/agregarPermiso.php'})
-                        .then(function (response) {
-                            if(response.data.Estado === "ok")
-                                app.cargarInformacion();
-                            else
-                                alert(response.data.Descripcion);
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+                        
                     },
                     eliminarPermiso: function(permiso){
                         const params = new URLSearchParams();
@@ -204,7 +187,24 @@
 
                     },
                     agregarPermiso: function(){
-
+                        const params = new URLSearchParams();
+                        params.append('idNodoOrigen', this.nuevoPermiso.nodoOrigen);                        
+                        params.append('idNodoDestino', this.nuevoPermiso.nodoDestino);
+                        params.append('idUsuario', this.usuario.id);                        
+                        axios({
+                            method:"POST",
+                            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                            data: params,
+                            url: '/Controladores/agregarPermiso.php'})
+                        .then(function (response) {
+                            if(response.data.Estado === "ok")
+                                app.cargarInformacion();
+                            else
+                                alert(response.data.Descripcion);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                     },
                     cargarInformacion: function(){
                         axios.get("/Controladores/obtenerInformacionUsuario.php?usuario=<?=$idUsuario?>")
