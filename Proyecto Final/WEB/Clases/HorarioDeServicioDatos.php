@@ -32,7 +32,7 @@
                 }
                 $pstmSelect->close();
                 if($sePuede){
-                    $retorno = new Modelos\HorarioDeServicio($id,UsuarioDatos::getUsuarioById($idUsuario,$conexion), $diaDeLaSemana, new \DateTime($horaInicio), new \DateTime($horaFin));
+                    $retorno = new Modelos\HorarioDeServicio($id,UsuarioDatos::getUsuarioById($conexion, $idUsuario), $diaDeLaSemana, new \DateTime($horaInicio), new \DateTime($horaFin));
                 }
             }
             return $retorno;
@@ -50,7 +50,7 @@
                 }
                 $pstmSelect->close();                
                 for($i = 0; $i < count($arrayIDs); $i++){
-                    $retorno[] = HorarioDeServicioDatos::getHorarioDeServicioById($conexion, intval($arrayIDs[$i]));
+                    $retorno[] = HorarioDeServicioDatos::getHorarioDeServicioById($conexion, $arrayIDs[$i]);
                 }
             }
             return $retorno;
