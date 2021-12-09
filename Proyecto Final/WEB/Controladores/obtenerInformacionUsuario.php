@@ -42,5 +42,5 @@
     $conexion->close();
     //ob_clean();    
     header("Content-type: application/json");
-    echo(json_encode($sal));
+    echo(json_encode($sal,JSON_UNESCAPED_UNICODE));
 ?>
