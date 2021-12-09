@@ -41,7 +41,7 @@
     }
     $conexion->close();
     //ob_clean();    
-    print_r($sal);
+    //print_r($sal);
     header("Content-type: application/json");
     echo(json_encode($sal,JSON_UNESCAPED_UNICODE));
 ?>
