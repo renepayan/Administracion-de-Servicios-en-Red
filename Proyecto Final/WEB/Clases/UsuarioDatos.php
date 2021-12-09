@@ -90,9 +90,15 @@
             $retorno = false;
             if($pstmInsert = $conexion->prepare("INSERT INTO tbl_Usuarios (Nombre, Usuario, Password, Nivel, Grupo, GrabarLlamadas, LlamarAGrupos, LlamarExtensiones, Extension, Nodo) VALUES (?,?,?,?,?,?,?,?,?,?)")){
                 $nombre = $usuario->getNombre();
-                $usuario = $usuario->getUsuario();
-                
-                $pstmInsert->bind_param("sssiibbbsi",$nombre, clone $usuario->getUsuario(), clone $usuario->getPassword(), clone $usuario->getNivel(), clone $usuario->getGrupo()->getId(), clone $usuario->isLlamarAGrupos(), clone $usuario->isLlamarExtensiones(), clone $usuario->getExtension(), clone $usuario->getNodo()->getId());
+                $usuarioSTR = $usuario->getUsuario();
+                $password = $usuario->getPassword();
+                $nivel = $usuario->getNivel();
+                $grupo = $usuario->getGrupo()->getId();
+                $llamarAGrupos = $usuario->isLlamarAGrupos();
+                $llamarAExtensiones = $usuario->isLlamarExtensiones();
+                $extension = $usuario->getExtension();
+                $nodo = $usuario->getNodo()->getId();
+                $pstmInsert->bind_param("sssiiiiisi",$nombre, $usuarioSTR, $password, $nivel, $grupo, $llamarAGrupos, $llamarAExtensiones, $extension, $nodo);
                 $pstmInsert->execute();        
                 $idUsuario = $pstmInsert->insert_id;
                 $pstmInsert->close();
