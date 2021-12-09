@@ -114,7 +114,7 @@
             $retorno["grabarLlamadas"] = $this->grabarLlamadas;
             $retorno["llamarAGrupos"] = $this->llamarAGrupos;
             $retorno["llamarExtensiones"] = $this->llamarExtensiones;
-            $retorno["extension"] = $this->extensiones;
+            $retorno["extension"] = $this->extension;
             return $retorno;
         }
     }
