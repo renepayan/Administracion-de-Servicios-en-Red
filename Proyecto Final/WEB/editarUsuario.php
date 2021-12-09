@@ -187,7 +187,7 @@
                         const params = new URLSearchParams();
                         params.append('diaDeLaSemana', this.nuevoHorario.diaDeLaSemana);
                         params.append('horaInicio', this.nuevoHorario.horaInicio);
-                        params.append('horaFin', this.nuevoHorario.horaInicio);
+                        params.append('horaFin', this.nuevoHorario.horaFin);
                         params.append('idUsuario', this.usuario.id);                        
                         axios({
                             method:"POST",
