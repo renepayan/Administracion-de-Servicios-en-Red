@@ -28,7 +28,7 @@
                 },
                 methods:{
                     enviar: function(){
-                        axios.post('/user', {
+                        axios.post('/Controladores/login.php', {
                             usuario: this.usuario,
                             password: this.password
                         })
