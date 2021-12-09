@@ -54,7 +54,7 @@
             $retorno["usuario"] = $this->usuario->toAssociativeArray();
             $retorno["diaDeLaSemana"] = $this->diaDeLaSemana;
             $retorno["horaInicio"] = $this->horaInicio->format("H:i:s");
-            $retorno["horaFin"] = $this->horafin->format("H:i:s");
+            $retorno["horaFin"] = $this->horaFin->format("H:i:s");
             return $retorno;
         }
     }
