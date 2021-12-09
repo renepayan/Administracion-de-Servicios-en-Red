@@ -37,7 +37,7 @@
                     $sal["Descripcion"] = "El dia de la semana es invalido";
                 }else{
                     $nuevoHorario = new PBX\Modelos\HorarioDeServicio(null,$usuario,$diaDeLaSemana,$horaInicio,$horaFin);
-                    if(!PBX\HorarioDeServicioDatos::addHorarioDeServicio($conexion,$nuevoPermiso)){
+                    if(!PBX\HorarioDeServicioDatos::addHorarioDeServicio($conexion,$nuevoHorario)){
                         $sal["Estado"] = "error";
                         $sal["Descripcion"] = "Error al insertar el nuevo horario en la base de datos";
                     }else{
