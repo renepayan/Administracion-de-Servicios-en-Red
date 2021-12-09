@@ -20,6 +20,17 @@
             }
             return $retorno;
         }
+        public static function deleteHorarioDeServicio($conexion, Modelos\HorarioDeServicio $horarioDeServicio):bool{
+            $retorno = false;
+            if($pstmInsert = $conexion->prepare("DELETE FROM tbl_HorariosDeServicios WHERE idHorario = ? LIMIT 1")){
+                $id = $horarioDeServicio->getId();
+                $pstmInsert->bind_param("i",$id);
+                $pstmInsert->execute();                                
+                $pstmInsert->close();                
+                $retorno = true;
+            }
+            return $retorno;
+        }
         public static function getHorarioDeServicioById($conexion, int $id):?Modelos\HorarioDeServicio{
             $retorno = null;
             if($pstmSelect = $conexion->prepare("SELECT Usuario,DiaDeLaSemana,HoraInicio,HoraFin FROM tbl_HorariosDeServicios WHERE idHorario = ? LIMIT 1")){
