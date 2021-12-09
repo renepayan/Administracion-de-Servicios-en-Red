@@ -28,10 +28,14 @@
                 },
                 methods:{
                     enviar: function(){
-                        axios.post('/Controladores/login.php', {
-                            usuario: this.usuario,
-                            password: this.password
-                        })
+                        const params = new URLSearchParams();
+                        params.append('usuario', this.usuario);
+                        params.append('password', this.password);
+                        axios(
+                            method:"POST",
+                            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                            data: params,
+                            url: '/Controladores/login.php')
                         .then(function (response) {
                             console.log(response);
                         })
