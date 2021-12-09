@@ -40,7 +40,7 @@
         $sal["Descripcion"] = "El usuario no esta logueado";
     }
     $conexion->close();
-    ob_clean();    
+    //ob_clean();    
     header("Content-type: application/json");
     echo(json_encode($sal));
 ?>
