@@ -25,7 +25,7 @@
         }
         public static function getUsuarioById($conexion, int $id):?Modelos\Usuario{
             $retorno = null;
-            if($pstmSelect = $conexion->prepare("SELECT SELECT idUsuario, Nombre, Usuario, Password, Nivel, Grupo, GrabarLlamadas,LlamarAGrupos,LlamarExtensiones, Extension, Nodo from tbl_Usuarios WHERE idUsuario = ? LIMIT 1")){
+            if($pstmSelect = $conexion->prepare("SELECT idUsuario, Nombre, Usuario, Password, Nivel, Grupo, GrabarLlamadas,LlamarAGrupos,LlamarExtensiones, Extension, Nodo from tbl_Usuarios WHERE idUsuario = ? LIMIT 1")){
                 $pstmSelect->bind_param("i",$id);                
                 $pstmSelect->execute();
                 $pstmSelect->bind_result($idUsuario, $nombre, $usuario, $password, $nivel, $idGrupo, $grabarLlamadas, $llamarAGrupos, $llamarAExtensiones, $extension, $idNodo);
