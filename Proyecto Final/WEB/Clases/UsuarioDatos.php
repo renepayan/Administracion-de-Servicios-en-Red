@@ -94,11 +94,12 @@
                 $password = $usuario->getPassword();
                 $nivel = $usuario->getNivel();
                 $grupo = $usuario->getGrupo()->getId();
-                $llamarAGrupos = $usuario->isLlamarAGrupos();
-                $llamarAExtensiones = $usuario->isLlamarExtensiones();
+                $grabarLlamadas = (int)$usuario->isGrabarLlamadas();
+                $llamarAGrupos = (int)$usuario->isLlamarAGrupos();
+                $llamarAExtensiones = (int)$usuario->isLlamarExtensiones();
                 $extension = $usuario->getExtension();
                 $nodo = $usuario->getNodo()->getId();
-                $pstmInsert->bind_param("sssiiiisi",$nombre, $usuarioSTR, $password, $nivel, $grupo, $llamarAGrupos, $llamarAExtensiones, $extension, $nodo);
+                $pstmInsert->bind_param("sssiiiiisi",$nombre, $usuarioSTR, $password, $nivel, $grupo, $grabarLlamadas, $llamarAGrupos, $llamarAExtensiones, $extension, $nodo);
                 $pstmInsert->execute();        
                 $idUsuario = $pstmInsert->insert_id;
                 $pstmInsert->close();
