@@ -2,8 +2,7 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    require_once '../Clases/Modelos/Usuario.php';
-    require_once '../Clases/Modelos/Llamadas.php';
+    require_once '../Clases/Modelos/Usuario.php';    
     require_once '../Clases/Modelos/Nodo.php';
     require_once '../Clases/Modelos/Grupo.php';
     require_once '../Clases/Modelos/PermisoLlamada.php';
