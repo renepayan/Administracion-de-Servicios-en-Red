@@ -39,6 +39,12 @@
                         </tbody>
                     </table>
                 </div>
+                <div>
+                    <a href="home.php">Ver Llamadas</a></br>
+                    <a href="listaUsuarios.php">Ver Usuarios</a></br>
+                    <a href="listaNodos.php">Ver Nodos</a></br>
+                    <a href="listaGrupos.php">Ver Grupos</a></br> 
+                </div>
             <div>               
         </div>
         <script>
