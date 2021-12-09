@@ -37,7 +37,8 @@
                             data: params,
                             url: '/Controladores/login.php'})
                         .then(function (response) {
-                            let respuesta = JSON.parse(response);
+                            console.log(response);
+                            let respuesta = JSON.parse(response.data);
                             if(respuesta.Estado === "ok"){
                                 window.location.replace("home.php");
                             }else{
