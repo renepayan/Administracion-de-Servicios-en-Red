@@ -20,7 +20,7 @@
             $grupoDelUsuarioARegistrar = PBX\GrupoDatos::getGrupoAleatorio($conexion);
             $extension = PBX\UsuarioDatos::getLastExtension($conexion);
             $extension = (intval($extension)+1)."";        
-            $usuarioNuevo = new Usuario(
+            $usuarioNuevo = new PBX\Usuario(
                 null,
                 $nombre,
                 $usuario,
@@ -70,7 +70,7 @@
                                 $sal["Estado"] = "error";
                                 $sal["Detalle"] = "La extension ya esta en uso";
                             }else{
-                                $usuarioNuevo = new Usuario(
+                                $usuarioNuevo = new PBX\Usuario(
                                     null,
                                     $nombre,
                                     $usuario,
