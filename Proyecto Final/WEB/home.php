@@ -109,26 +109,29 @@
                     }]
                 },
                 methods:{
-                    enviar: function(){
-                        const params = new URLSearchParams();
-                        params.append('usuario', this.usuario);
-                        params.append('password', this.password);
-                        axios({
-                            method:"POST",
-                            headers: { 'content-type': 'application/x-www-form-urlencoded' },
-                            data: params,
-                            url: '/Controladores/login.php'})
-                        .then(function (response) {
-                            if(response.data.Estado === "ok"){
-                                window.location.replace("home.php");
-                            }else{
-                                alert(response.data.Descripcion);
-                            }
+                    cargarInformacion: function(){
+                        axios.get("/Controladores/obtenerInformacionUsuario.php")
+                        .then(function(response){
+                            console.log(response);
                         })
-                        .catch(function (error) {
+                        .catch(function(error){
                             console.log(error);
                         });
-                    }
+                    },
+                    cargarLlamadas: function(){
+                        axios.get("/Controladores/obtenerLlamadas.php")
+                        .then(function(response){
+                            console.log(response);
+                        })
+                        .catch(function(error){
+                            console.log(error);
+                        });
+                    }                    
+                },
+                mounted:function(){
+                    console.log("montado");
+                    this.cargarLlamadas();
+                    this.cargarInformacion();
                 }
             });
         </script>
