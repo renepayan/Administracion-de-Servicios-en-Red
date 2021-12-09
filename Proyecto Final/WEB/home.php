@@ -90,7 +90,7 @@
                             ip:"",
                             dominio:""
                         },
-                        Grupo:{
+                        grupo:{
                             id:0,
                             nombre:"",
                             extension:""
