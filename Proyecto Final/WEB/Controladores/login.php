@@ -11,7 +11,7 @@
     if(empty($_SESSION["usuario"])){
         $usuario = $_POST["usuario"];
         $password = $_POST["password"];    
-        $usuarioEnSistema = UsuarioDatos::getUsuarioByUsuarioAndPassword($conexion, $usuario, $password);
+        $usuarioEnSistema = PBX\UsuarioDatos::getUsuarioByUsuarioAndPassword($conexion, $usuario, $password);
         if($usuarioEnSistema == null){
             $sal["Estado"] = "error";
         }else{
