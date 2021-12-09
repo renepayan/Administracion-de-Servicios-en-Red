@@ -6,7 +6,7 @@
     require_once 'Modelos/Grupo.php';
     require_once 'Modelos/Nodo.php';
     class UsuarioDatos{
-        public static function getUsuarioByNombreDeUsuario($conexion, string $nombreDeUsuario):?Usaurio{
+        public static function getUsuarioByNombreDeUsuario($conexion, string $nombreDeUsuario):?Modelos\Usaurio{
             $retorno = null;
             if($pstmSelect = $conexion->prepare("SELECT idUsuario from tbl_Usuarios WHERE Usuario = ? LIMIT 1")){
                 $pstmSelect->bind_param("s",$usuario);
@@ -23,7 +23,7 @@
             }            
             return $retorno;
         }
-        public static function getUsuarioById($conexion, int $id):?Usuario{
+        public static function getUsuarioById($conexion, int $id):?Modelos\Usuario{
             $retorno = null;
             if($pstmSelect = $conexion->prepare("SELECT SELECT idUsuario, Nombre, Usuario, Password, Nivel, Grupo, GrabarLlamadas,LlamarAGrupos,LlamarExtensiones, Extension, Nodo from tbl_Usuarios WHERE idUsuario = ? LIMIT 1")){
                 $pstmSelect->bind_param("i",$id);                
@@ -35,12 +35,12 @@
                 }                                
                 $pstmSelect->close();
                 if($sePuede){
-                    $retorno = new Usuario($idUsuario, $nombre, $usuario, $password, $nivel, GrupoDatos::getGrupoById($conexion, $idGrupo), $grabarLlamadas, $llamarAGrupos, $llamarAExtensiones, $extension, NodoDatos::getNodoById($conexion, $idNodo));
+                    $retorno = new Modelos\Usuario($idUsuario, $nombre, $usuario, $password, $nivel, GrupoDatos::getGrupoById($conexion, $idGrupo), $grabarLlamadas, $llamarAGrupos, $llamarAExtensiones, $extension, NodoDatos::getNodoById($conexion, $idNodo));
                 }
             }   
             return $retorno;
         }
-        public static function getUsuarioByExtension($conexion, string $extension):?Usuario{
+        public static function getUsuarioByExtension($conexion, string $extension):?Modelos\Usuario{
             $retorno = null;
             if($pstmSelect = $conexion->prepare("SELECT idUsuario from tbl_Usuarios WHERE Extension = ? LIMIT 1")){
                 $pstmSelect->bind_param("s",$extension);
@@ -69,7 +69,7 @@
             }            
             return $retorno;
         }
-        public static function getUsuarioByUsuarioAndPassword($conexion, string $usuario, string $password):?Usuario{
+        public static function getUsuarioByUsuarioAndPassword($conexion, string $usuario, string $password):?Modelos\Usuario{
             $retorno = null;
             if($pstmSelect = $conexion->prepare("SELECT idUsuario from tbl_Usuarios WHERE Usuario = ? AND Password = ? LIMIT 1")){
                 $pstmSelect->bind_param("ss",$usuario, $password);
@@ -83,6 +83,17 @@
                 if($id>0){
                     $retorno = UsuarioDatos::getUsuarioById($conexion, $id);
                 }
+            }            
+            return $retorno;
+        }
+        public static function addUsuario($conexion, Usuario $usuario):bool{
+            $retorno = false;
+            if($pstmInsert = $conexion->prepare("INSERT INTO tbl_Usuario (Nombre, Usuario, Password, Nivel, Grupo, GrabarLlamadas, LlamarAGrupos, LlamarExtensiones, Extension, Nodo) VALUES (?,?,?,?,?,?,?,?,?,?)")){
+                $pstmSelect->bind_param("sssiibbbsi",$usuario->getNombre(), $usuario->getUsuario(), $usuario->getPassword(), $usuario->getNivel(), $usuario->getGrupo()->getId(), $usuario->isLlamarAGrupos(), $usuario->isLlamarExtensiones(), $usuario->getExtension(), $usuario->getNodo()->getId());
+                $pstmInsert->execute();        
+                $idUsuario = $pstmInsert->insert_id;
+                $pstmInsert->close();
+                $usuario->setId($idUsuario);
             }            
             return $retorno;
         }

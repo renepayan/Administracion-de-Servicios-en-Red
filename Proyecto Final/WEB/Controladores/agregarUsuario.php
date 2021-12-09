@@ -3,7 +3,15 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     require_once '../Clases/Modelos/Usuario.php';
+    require_once '../Clases/Modelos/Nodo.php';
+    require_once '../Clases/Modelos/Grupo.php';
+    require_once '../Clases/Modelos/PermisoLlamada.php';
+    require_once '../Clases/Modelos/HorarioDeServicio.php';
     require_once '../Clases/UsuarioDatos.php';
+    require_once '../Clases/PermisoLlamadaDatos.php';
+    require_once '../Clases/HorarioDeServicioDatos.php';
+    require_once '../Clases/NodoDatos.php';
+    require_once '../Clases/GrupoDatos.php';
     require_once 'ajustes.php';
     session_start();
     $conexion = new mysqli(HOST_DB, USUARIO_DB, PASSWORD_DB, NOMBRE_DB);
@@ -33,12 +41,22 @@
                 $extension,
                 $nodoDelUsuarioARegistrar
             );
-            if(PBX\UsuarioDatos::agregarUsuario($conexion, $usuarioNuevo)){                                    
-                $sal["Estado"] = "ok";                                    
-                $_SESSION["usuario"] = $nuevoUsuario->getId();
-            }else{
+            if(!PBX\UsuarioDatos::addUsuario($conexion, $usuarioNuevo)){                                    
                 $sal["Estado"] = "error";
-                $sal["Descripcion"] = "Error al insertar en la base de datos";
+                $sal["Descripcion"] = "Error al insertar el usuario en la base de datos";                
+            }else{
+                $permiso = new PBX\Modelos\PermisoLlamada(null, $usuarioNuevo, $nodoDelUsuarioARegistrar, $nodoDelUsuarioARegistrar);
+                if(!PBX\PermisoLlamadaDatos::addPermisoLlamada($conexion, $permiso)){
+                    $sal["Estado"] = "error";
+                    $sal["Descripcion"] = "Error al insertar el permiso de llamada en la base de datos";  
+                }else{                    
+                    for($i = 0; $i <= 5;$i++){
+                        $horario = new PBX\Modelos\HorarioDeServicio(null, $usuarioNuevo, $i, new \DateTime("15:00"), new \DateTime("20:00"));
+                        PBX\HorarioDeServicioDatos::addHorarioDeServicio($conexion, $horario);
+                    }                    
+                    $sal["Estado"] = "ok";                                    
+                    $_SESSION["usuario"] = $nuevoUsuario->getId();
+                }
             }                        
         }
     }else{
@@ -84,7 +102,7 @@
                                     $_POST["extension"],
                                     $nodoDelUsuarioARegistrar
                                 );
-                                if(PBX\UsuarioDatos::agregarUsuario($conexion, $usuarioNuevo)){                                    
+                                if(PBX\UsuarioDatos::addUsuario($conexion, $usuarioNuevo)){                                    
                                     $sal["Estado"] = "ok";                                    
                                 }else{
                                     $sal["Estado"] = "error";
