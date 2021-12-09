@@ -2,8 +2,8 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    require_once 'Clases/Modelos/Usuario.php';
-    require_once 'Clases/UsuarioDatos.php';
+    require_once '../Clases/Modelos/Usuario.php';
+    require_once '../Clases/UsuarioDatos.php';
     require_once 'ajustes.php';
     session_start();
     $conexion = new mysqli(HOST_DB, USUARIO_DB, PASSWORD_DB, NOMBRE_DB);
