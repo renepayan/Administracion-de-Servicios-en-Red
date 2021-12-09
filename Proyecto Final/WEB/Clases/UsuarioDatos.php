@@ -89,7 +89,10 @@
         public static function addUsuario($conexion, Modelos\Usuario $usuario):bool{
             $retorno = false;
             if($pstmInsert = $conexion->prepare("INSERT INTO tbl_Usuarios (Nombre, Usuario, Password, Nivel, Grupo, GrabarLlamadas, LlamarAGrupos, LlamarExtensiones, Extension, Nodo) VALUES (?,?,?,?,?,?,?,?,?,?)")){
-                $pstmInsert->bind_param("sssiibbbsi",$usuario->getNombre(), $usuario->getUsuario(), $usuario->getPassword(), $usuario->getNivel(), $usuario->getGrupo()->getId(), $usuario->isLlamarAGrupos(), $usuario->isLlamarExtensiones(), $usuario->getExtension(), $usuario->getNodo()->getId());
+                $nombre = $usuario->getNombre();
+                $usuario = $usuario->getUsuario();
+                
+                $pstmInsert->bind_param("sssiibbbsi",clone $usuario->getNombre(), clone $usuario->getUsuario(), clone $usuario->getPassword(), clone $usuario->getNivel(), clone $usuario->getGrupo()->getId(), clone $usuario->isLlamarAGrupos(), clone $usuario->isLlamarExtensiones(), clone $usuario->getExtension(), clone $usuario->getNodo()->getId());
                 $pstmInsert->execute();        
                 $idUsuario = $pstmInsert->insert_id;
                 $pstmInsert->close();
