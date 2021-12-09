@@ -30,7 +30,7 @@
                 }                                
                 $pstmSelect->close();
                 if($sePuede){
-                    $retorno = NodoDatos::getNodoById($idNodo, $conexion);
+                    $retorno = NodoDatos::getNodoById($conexion, $idNodo);
                 }
             }
             return $retorno;

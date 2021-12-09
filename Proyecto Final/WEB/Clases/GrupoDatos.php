@@ -30,7 +30,7 @@
                 }                                
                 $pstmSelect->close();
                 if($sePuede){
-                    $retorno = GrupoDatos::getGrupoById($idGrupo, $conexion);
+                    $retorno = GrupoDatos::getGrupoById($conexion, $idGrupo);
                 }
             }
             return $retorno;
