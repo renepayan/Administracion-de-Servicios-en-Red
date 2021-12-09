@@ -1,4 +1,7 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     require_once 'Clases/Modelos/Usuario.php';
     require_once 'Clases/UsuarioDatos.php';
     require_once 'ajustes.php';
