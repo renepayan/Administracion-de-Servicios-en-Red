@@ -7,9 +7,9 @@
     if(!empty($_GET["usuario"])){
         $idUsuario = $_GET["usuario"];
     }
-    $puedeEditar = false;
+    $puedeEditar = 0;
     if($idUsuario != $_SESSION["usuario"]){
-        $puedeEditar = true;
+        $puedeEditar = 1;
     }
 ?>
 <!Doctype html>
