@@ -116,7 +116,7 @@
                 $ids = array();
                 $pstmSelect->execute();
                 $pstmSelect->bind_result($idUsuario);
-                if($pstmSelect->fetch()){
+                while($pstmSelect->fetch()){
                     $ids[] = $idUsuario;
                 }                
                 $pstmSelect->close();
