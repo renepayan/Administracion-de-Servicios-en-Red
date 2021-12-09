@@ -2,7 +2,7 @@
     namespace PBX;
     require_once 'Modelos/Grupo.php';
     class GrupoDatos{
-        public static function getGrupoById($conexion, int $id):?Nodo{
+        public static function getGrupoById($conexion, int $id):?Modelos\Grupo{
             $retorno = null;
             if($pstmSelect = $conexion->prepare("SELECT idGrupo, Extension, Nombre FROM tbl_Grupos WHERE idGrupo = ?")){
                 $pstmSelect->bind_param("i",$id); 
@@ -19,7 +19,7 @@
             }
             return $retorno;
         }
-        public static function getGrupoAleatorio($conexion):?Nodo{
+        public static function getGrupoAleatorio($conexion):?Modelos\Grupo{
             $retorno = null;
             if($pstmSelect = $conexion->prepare("SELECT idGrupo FROM tbl_Grupos ORDER BY RAND() LIMIT 1")){
                 $pstmSelect->execute();
