@@ -16,25 +16,38 @@
     session_start();
     $conexion = new mysqli(HOST_DB, USUARIO_DB, PASSWORD_DB, NOMBRE_DB);    
     $sal = array();
+    $usuarioABuscar = (!empty($_GET["usuario"])?$_GET["usuario"]:$_SESSION["usuario"]);
     if(!empty($_SESSION["usuario"])){
-        $usuario = PBX\UsuarioDatos::getUsuarioById($conexion,$_SESSION["usuario"]);
-        if($usuario == null){
+        $usuarioLocal = PBX\UsuarioDatos::getUsuarioById($conexion, $_SESSION["usuario"]);        
+        if($usuarioLocal == null){
             $sal["Estado"] = "error";
-            $sal["Descripcion"] = "El usuario no existe";            
+            $sal["Descripcion"] = "El usuario local no existe";
         }else{
-            $sal["Usuario"] = $usuario->toAssociativeArray();
-            $sal["Estado"] = "ok";
-            $sal["Permisos"] = array();
-            $permisos = PBX\PermisoLlamadaDatos::getPermisosLlamadaByUsuario($conexion,$usuario);
-            for($i = 0;$i < count($permisos); $i++){
-                $sal["Permisos"][] = $permisos[$i]->toAssociativeArray();
-            }
-            $sal["Horarios"] = array();
-            $horarios = PBX\HorarioDeServicioDatos::getHorariosDeServicioByUsuario($conexion,$usuario);
-            for($i = 0;$i < count($horarios); $i++){
-                $sal["Horarios"][] = $horarios[$i]->toAssociativeArray();
+            if($usuarioABuscar != $_SESSION["usuario"] && $usuarioLocal->getNivel() == 0){
+                $sal["Estado"] = "error";
+                $sal["Descripcion"] = "No tiene los permisos necesarios para obtener esa informacion";                  
+            }else{
+                $usuario = PBX\UsuarioDatos::getUsuarioById($conexion,usuarioABuscar);
+                if($usuario == null){
+                    $sal["Estado"] = "error";
+                    $sal["Descripcion"] = "El usuario no existe";            
+                }else{                    
+                    $sal["Usuario"] = $usuario->toAssociativeArray();
+                    $sal["Estado"] = "ok";
+                    $sal["Permisos"] = array();
+                    $permisos = PBX\PermisoLlamadaDatos::getPermisosLlamadaByUsuario($conexion,$usuario);
+                    for($i = 0;$i < count($permisos); $i++){
+                        $sal["Permisos"][] = $permisos[$i]->toAssociativeArray();
+                    }
+                    $sal["Horarios"] = array();
+                    $horarios = PBX\HorarioDeServicioDatos::getHorariosDeServicioByUsuario($conexion,$usuario);
+                    for($i = 0;$i < count($horarios); $i++){
+                        $sal["Horarios"][] = $horarios[$i]->toAssociativeArray();
+                    }
+                }
             }
         }
+        
     }else{
         $sal["Estado"] = "error";
         $sal["Descripcion"] = "El usuario no esta logueado";

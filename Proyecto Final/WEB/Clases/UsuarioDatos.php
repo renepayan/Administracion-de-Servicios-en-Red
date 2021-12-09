@@ -119,6 +119,7 @@
                 while($pstmSelect->fetch()){
                     $ids[] = $idUsuario;
                 }                
+                print_r($ids);
                 $pstmSelect->close();
                 for($i = 0; $i < count($ids);$i++){
                     $retorno[] = UsuarioDatos::getUsuarioById($conexion, $ids[$i]);
