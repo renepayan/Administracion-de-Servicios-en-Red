@@ -31,11 +31,11 @@
                         const params = new URLSearchParams();
                         params.append('usuario', this.usuario);
                         params.append('password', this.password);
-                        axios(
+                        axios({
                             method:"POST",
                             headers: { 'content-type': 'application/x-www-form-urlencoded' },
                             data: params,
-                            url: '/Controladores/login.php')
+                            url: '/Controladores/login.php'})
                         .then(function (response) {
                             console.log(response);
                         })
