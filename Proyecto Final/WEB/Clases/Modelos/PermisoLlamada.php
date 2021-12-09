@@ -40,5 +40,13 @@
         public function setNodoDestino(Nodo $nodoDestino):void{
             $this->nodoDestino = $nodoDestino;
         }
+        public function toAssociativeArray():array{
+            $retorno = array();
+            $retorno["id"] = $this->id;
+            $retorno["usuario"] = $this->usuario->toAssociativeArray();
+            $retorno["nodoOrigen"] = $this->nodoOrigen->toAssociativeArray();
+            $retorno["nodoDestino"] = $this->nodoDestino->toAssociativeArray();
+            return $retorno;
+        }
     }
 ?>
