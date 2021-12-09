@@ -1,6 +1,6 @@
 <?php
     namespace PBX;
-    require_once 'Modelos\PermisoLlamada.php';
+    require_once 'Modelos/PermisoLlamada.php';
     class PermisoDeLlamadaDatos{
         public static function addPermisoDeLlamada($conexion, Modelos\PermisoLlamada $permisoDeLlamada):bool{
             $retorno = false;
