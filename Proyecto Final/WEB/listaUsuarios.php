@@ -33,6 +33,7 @@
                                 <td>{{usuario.extension}}</td>
                                 <td>{{(usuario.nivel == 0)?"Usuario":"Administrador"}}</td>
                                 <td>{{usuario.nodo.nombre}}</td>
+                                <td>{{usuario.grupo.nombre}}</td>
                                 <td><a :href="'editarUsuario.php?usuario='+usuario.id">Editar</a>                                
                             </tr>
                         </tbody>
