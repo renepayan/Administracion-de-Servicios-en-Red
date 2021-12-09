@@ -23,9 +23,8 @@
             $sal["Estado"] = "error";
             $sal["Descripcion"] = "El usuario local no existe o no tiene los permisos";
         }else{
-            echo($idPermiso);
             $permiso = PBX\PermisoLlamadaDatos::getPermisoLlamadaById($conexion,$idPermiso);
-            if($horario == null){
+            if($permiso == null){
                 $sal["Estado"] = "error";
                 $sal["Descripcion"] = "El permiso no existe";
             }else{
@@ -42,7 +41,7 @@
         $sal["Descripcion"] = "El usuario no esta logueado";
     }
     $conexion->close();
-    //ob_clean();    
+    ob_clean();    
     //print_r($sal);
     header("Content-type: application/json");
     echo(json_encode($sal,JSON_UNESCAPED_UNICODE));
