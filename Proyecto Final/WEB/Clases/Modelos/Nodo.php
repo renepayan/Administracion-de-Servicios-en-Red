@@ -6,7 +6,7 @@
         private string $ip;
         private string $dominio;
         private string $nombre;
-        public static function __construct(?int $id, int $numero, string $ip, string $dominio, string $nombre){
+        public function __construct(?int $id, int $numero, string $ip, string $dominio, string $nombre){
             $this->id = $id;
             $this->numero = $numero;
             $this->ip = $ip;
