@@ -1,7 +1,7 @@
 <?php
     require_once 'Clases/Modelos/Usuario.php';
     require_once 'Clases/UsuarioDatos.php';
-    require_once 'Ajustes.php';
+    require_once 'ajustes.php';
     session_start();
     $conexion = new mysqli(HOST_DB, USUARIO_DB, PASSWORD_DB, NOMBRE_DB);
     $usuario = $_POST["usuario"];
@@ -12,9 +12,21 @@
         $nodoDelUsuarioARegistrar = NodoDatos::getNodoAleatorio($conexion);
         $grupoDelUsuarioARegistrar = GrupoDatos::getGrupoAleatorio($conexion);
         $extension = UsuarioDatos::getLastExtension($conexion);
-        $extension = (intval($extension)+1).""; 
-        $nivel = 0;
-
+        $extension = (intval($extension)+1)."";        
+        $usuarioNuevo = new Usuario(
+            null,
+            $nombre,
+            $usuario,
+            0,
+            $grupoDelUsuarioARegistrar,
+            false,
+            true,
+            true,
+            $extension,
+            $nodoDelUsuarioARegistrar
+        );
+        $_SESSION["usuario"] = $nuevoUsuario->getId();
+        $sal["Estado"] = "ok";
     }else{
         $idUsuarioEnSesion = $_SESSION["usuario"];
         $usuarioEnSesion = UsuarioDatos::getUsuarioById($conexion, $idUsuarioEnSesion);
@@ -57,7 +69,7 @@
                                     $_POST["extension"],
                                     $nodoDelUsuarioARegistrar
                                 );
-                                if(UsuarioDatos::agregarUsuario($conexion, $usuarioNuevo)){
+                                if(UsuarioDatos::agregarUsuario($conexion, $usuarioNuevo)){                                    
                                     $sal["Estado"] = "ok";                                    
                                 }else{
                                     $sal["Estado"] = "error";
@@ -69,8 +81,7 @@
                 }                
             }
         }
-    }            
-    $grupo = $_POST["grupo"];
+    }                
     $conexion->close();
     ob_clean();    
     header("Content-type: application/json");
