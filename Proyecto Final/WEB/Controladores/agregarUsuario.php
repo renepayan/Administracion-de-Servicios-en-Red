@@ -50,12 +50,12 @@
                     $sal["Estado"] = "error";
                     $sal["Descripcion"] = "Error al insertar el permiso de llamada en la base de datos";  
                 }else{                    
-                    for($i = 0; $i <= 5;$i++){
+                    for($i = 0; $i < 5;$i++){
                         $horario = new PBX\Modelos\HorarioDeServicio(null, $usuarioNuevo, $i, new \DateTime("15:00"), new \DateTime("20:00"));
                         PBX\HorarioDeServicioDatos::addHorarioDeServicio($conexion, $horario);
                     }                    
                     $sal["Estado"] = "ok";                                    
-                    $_SESSION["usuario"] = $nuevoUsuario->getId();
+                    $_SESSION["usuario"] = $usuarioNuevo->getId();
                 }
             }                        
         }
@@ -116,7 +116,7 @@
         }
     }                
     $conexion->close();
-    //ob_clean();    
+    ob_clean();    
     header("Content-type: application/json");
     echo(json_encode($sal));
 ?>
