@@ -14,7 +14,7 @@
                 }                                
                 $pstmSelect->close();
                 if($sePuede){
-                    $retorno = new Nodo($idNodo, $numero, $ip, $dominio, $nombre);
+                    $retorno = new Modelos\Nodo($idNodo, $numero, $ip, $dominio, $nombre);
                 }
             }
             return $retorno;

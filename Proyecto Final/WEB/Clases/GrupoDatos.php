@@ -14,7 +14,7 @@
                 }                                
                 $pstmSelect->close();
                 if($sePuede){
-                    $retorno = new Grupo($idGrupo, $extension, $nombre);
+                    $retorno = new Modelos\Grupo($idGrupo, $extension, $nombre);
                 }
             }
             return $retorno;
