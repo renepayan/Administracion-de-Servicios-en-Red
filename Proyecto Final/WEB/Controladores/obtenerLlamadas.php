@@ -32,14 +32,9 @@
                 $llamadas = PBX\LlamadaDatos::getAllLlamadas($conexion);
             }else{
                 $llamadas = PBX\LlamadaDatos::getLlamadasByUsuario($conexion,$usuario);
-            }
-            for($i = 0;$i < count($permisos); $i++){
-                $sal["Permisos"][] = $permisos[$i]->toAssociativeArray();
-            }
-            $sal["Horarios"] = array();
-            $horarios = PBX\HorarioDeServicioDatos::getHorariosDeServicioByUsuario($conexion,$usuario);
-            for($i = 0;$i < count($horarios); $i++){
-                $sal["Horarios"][] = $horarios[$i]->toAssociativeArray();
+            }            
+            for($i = 0;$i < count($llamadas); $i++){
+                $sal["Llamadas"][] = $llamadas[$i]->toAssociativeArray();
             }
         }
     }else{

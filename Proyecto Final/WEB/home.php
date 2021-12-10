@@ -175,7 +175,10 @@
                     cargarLlamadas: function(){
                         axios.get("/Controladores/obtenerLlamadas.php")
                         .then(function(response){
-                            console.log(response);
+                            if(response.data.Estado === "ok")
+                                app.llamadas = response.data.Llamadas;
+                            else
+                                alert(response.data.Descripcion);
                         })
                         .catch(function(error){
                             console.log(error);

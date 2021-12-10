@@ -14,20 +14,23 @@
     $telefonoMarcado = $argv[4];
     $idUnico = $argv[5];
 
+    $agi = new AGI();
     $conexion = new mysqli($HOST_DB, $USUARIO_DB, $PASSWORD_DB, $NOMBRE_DB); //Establezco la conexion con la base de datos
     if($conexion == null){
+        $agi->verbose("Error al conectar a la DB");
         die("Error al conectar a la base de datos");
     }
-    $agi = new AGI();
     /**
      * En esta seccion se extraen los datos de conexion entre nodos del usuario
      */
     $idLlamada = 0;
     if($pstmInsert = $conexion->prepare("INSERT INTO tbl_Llamadas (Usuario, NodoOrigen, NodoDestino, Telefono, FechaInicio, FechaFin, Grabada, IdAsterisk) VALUES (?,?,?,?,NOW(),NOW(),?,?)")){
-        $pstmInsert->bind_param("iiisbs", $usuario, $NODO, $nodoDestino, $telefonoMarcado, ($tieneGrabacion ==  1? true:false), $idUnico);
+        $pstmInsert->bind_param("iiisis", $usuario, $NODO, $nodoDestino, $telefonoMarcado, $tieneGrabacion, $idUnico);
         $pstmInsert->execute();        
-        $idLlamada = $pstmInsert->insert_id;
+        $idLlamada = $pstmInsert->insert_id;        
         $pstmInsert->close();
+    }else{
+        $agi->verbose($conexion->error);
     }
     $agi->set_variable('idLlamada', $idLlamada);
     $conexion->close();

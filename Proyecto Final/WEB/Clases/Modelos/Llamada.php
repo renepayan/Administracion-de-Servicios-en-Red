@@ -55,6 +55,20 @@
     public function setFechaFin(\DateTime $fechaFin):void{
         $this->fechaFin = $fechaFin;
     }
+    public function toAssociativeArray():array{
+        $retorno = array();
+        $retorno["id"] = $this->id;
+        $retorno["usuario"] = $this->usuario->toAssociativeArray();
+        $retorno["nodoOrigen"] = $this->nodoOrigen->toAssociativeArray();
+        $retorno["nodoDestino"] = $this->nodoDestino->toAssociativeArray();
+        $retorno["telefono"] = $this->telefono;
+        $retorno["fechaInicio"] = $this->fechaInicio->format("Y/m/d H:i:s");
+        $retorno["fechaFin"] = $this->fechaFin->format("Y/m/d H:i:s");
+        $retorno["grabada"] = $this->grabada;
+        $retorno["idAsterisk"] = $this->idAsterisk;
+        $retorno["id"] = $this->id;
+        return $retorno;
+    }
 }
 
 ?>

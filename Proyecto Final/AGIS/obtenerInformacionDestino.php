@@ -10,7 +10,7 @@
 
     
     //Aqui inicia el procedimiento para extraer la informacion
-    $extensionDestino = $argv[1];       
+    $extensionDestino = trim($argv[1]);  
     $conexion = new mysqli($HOST_DB, $USUARIO_DB, $PASSWORD_DB, $NOMBRE_DB); //Establezco la conexion con la base de datos
     if($conexion == null){
         die("Error al conectar a la base de datos");
@@ -22,11 +22,11 @@
     $encontreElDestino = false;    
     $mismoNodo = 0;
     if($pstmSelect = $conexion->prepare("SELECT Nodo FROM tbl_Usuarios WHERE Extension = ? LIMIT 1")){
-        $pstmSelect->bind_param("s", $extension);
+        $pstmSelect->bind_param("s", $extensionDestino);
         $pstmSelect->execute();
         $pstmSelect->bind_result($nodoDestino);
         if($pstmSelect->fetch()){
-            $encontreElUsuario = true;            
+            $encontreElDestino = true;            
         }
         $pstmSelect->close();
     }

@@ -7,7 +7,7 @@
     $HOST_DB = "payan.ddns.net";
     $NOMBRE_DB = "db_pbx";
     $NODO = 1;
-    $llamada = intval($argv[1]);
+    $llamada = $argv[1];
 
     $conexion = new mysqli($HOST_DB, $USUARIO_DB, $PASSWORD_DB, $NOMBRE_DB); //Establezco la conexion con la base de datos
     if($conexion == null){
@@ -18,8 +18,8 @@
      * En esta seccion se extraen los datos de conexion entre nodos del usuario
      */
     $tienePermisoLlamada = 0;
-    if($pstmUpdate = $conexion->prepare("UPDATE tbl_Llamadas SET FechaFin = ? WHERE idLlamada = ?")){
-        $pstmUpdate->bind_param("i", $llamada);
+    if($pstmUpdate = $conexion->prepare("UPDATE tbl_Llamadas SET FechaFin = NOW() WHERE idAsterisk = ?")){
+        $pstmUpdate->bind_param("d", $llamada);
         $pstmUpdate->execute();        
         $pstmUpdate->close();
     }
