@@ -22,7 +22,7 @@
         exec("echo \"\" > ".$FICHERO);
         while($pstmSelect->fetch()){                
             file_put_contents($FICHERO, "[".$extension."]\n", FILE_APPEND | LOCK_EX);
-            file_put_contents($FICHERO, "username=\"".utf8_encode($usuario)."\"\n", FILE_APPEND | LOCK_EX);            
+            file_put_contents($FICHERO, "username=".utf8_encode($usuario)."\n", FILE_APPEND | LOCK_EX);            
             file_put_contents($FICHERO, "secret=".$password."\n", FILE_APPEND | LOCK_EX);
             file_put_contents($FICHERO, "accountcode=".$extension."\n", FILE_APPEND | LOCK_EX);
             file_put_contents($FICHERO, "callerid=\"".$nombre."\"\n", FILE_APPEND | LOCK_EX);

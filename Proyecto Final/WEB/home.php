@@ -78,6 +78,7 @@
                 <table>
                         <thead>
                             <tr>
+                                <th>Usuario:</th>
                                 <th>Fecha de inicio:</th>
                                 <th>Fecha de fin:</th>
                                 <th>Nodo de origen:</th>
@@ -89,6 +90,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="llamada in llamadas">
+                                <td>{{llmada.usuario.Nombre}}
                                 <td>{{llamada.fechaInicio}}</td>
                                 <td>{{llamada.fechaFin}}</td>
                                 <td>{{llamada.nodoOrigen.nombre}}</td>
