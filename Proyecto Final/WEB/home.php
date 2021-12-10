@@ -96,7 +96,7 @@
                                 <td>{{llamada.telefono}}</td>
                                 <td>$0.00</td>
                                 <td v-if="llamada.grabada">
-                                    <a v-bind:href="'https://'+llamada.nodoOrigen.url+'/grabaciones/'+llamada.idAsterisk+'.wav'">Descargar</a>
+                                    <a v-bind:href="'https://'+llamada.nodoOrigen.dominio+'/grabaciones/'+llamada.idAsterisk.trim()+'.wav'">Descargar</a>
                                 </td>
                                 <td v-else>
                                     No grabada
