@@ -42,7 +42,8 @@
             $retorno = array();
             if($pstmSelect = $conexion->prepare("SELECT idLlamada from tbl_Llamadas WHERE Usuario = ?")){                
                 $ids = array();
-                $pstmSelect->bind_param("i",$usuario->getId());
+                $idUsuario = $usuario->getId();
+                $pstmSelect->bind_param("i",$idUsuario);
                 $pstmSelect->execute();                
                 $pstmSelect->bind_result($idLlamada);
                 while($pstmSelect->fetch()){
