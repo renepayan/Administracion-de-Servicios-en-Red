@@ -26,7 +26,7 @@
             $sal["Descripcion"] = "El usuario local no existe o no tiene los permisos";
         }else{
             $alias = PBX\AliasDatos::getAliasById($conexion,$idAlias);
-            if($permiso == null){
+            if($alias == null){
                 $sal["Estado"] = "error";
                 $sal["Descripcion"] = "El alias no existe";
             }else{
