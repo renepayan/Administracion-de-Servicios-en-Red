@@ -14,7 +14,7 @@
                 $pstmInsert->execute();                
                 $idHorarioDeServicio = $pstmInsert->insert_id;
                 $pstmInsert->close();
-                $horarioDeServicio->setId($idHorarioDeServicio);
+                $alias->setId($idHorarioDeServicio);
                 $retorno = true;
             }
             return $retorno;
