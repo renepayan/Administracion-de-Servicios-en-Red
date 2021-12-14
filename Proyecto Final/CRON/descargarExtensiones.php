@@ -19,7 +19,7 @@
         $pstmSelect->bind_param("i", $NODO);
         $pstmSelect->execute();  
         $pstmSelect->bind_result($extension,$nombre,$usuario,$password);
-        exec("echo \"\" > ".$FICHERO);
+        exec("echo \"\" > ".$FICHERO);    
         while($pstmSelect->fetch()){                
             file_put_contents($FICHERO, "[".$extension."]\n", FILE_APPEND | LOCK_EX);
             file_put_contents($FICHERO, "username=".utf8_encode($usuario)."\n", FILE_APPEND | LOCK_EX);            
@@ -38,7 +38,7 @@
             file_put_contents($FICHERO, "allow=ulaw,alaw\n", FILE_APPEND | LOCK_EX);            
             file_put_contents($FICHERO, "transport=tls,udp\n", FILE_APPEND | LOCK_EX);
             file_put_contents($FICHERO, "encryption=no\n", FILE_APPEND | LOCK_EX);
-            file_put_contents($FICHERO, "\n", FILE_APPEND | LOCK_EX);
+            file_put_contents($FICHERO, "\n", FILE_APPEND | LOCK_EX);        
         }
         $pstmSelect->close();
         exec(" asterisk -rx \"sip reload\"");

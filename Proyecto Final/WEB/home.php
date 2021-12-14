@@ -32,8 +32,7 @@
             </div>
             <div v-if="usuario.nivel == 1">
                 <a href="listaUsuarios.php">Ver Usuarios</a></br>
-                <a href="listaNodos.php">Ver Nodos</a></br>
-                <a href="listaGrupos.php">Ver Grupos</a></br>                
+                <a href="listaAlias.php">Ver Alias</a></br>                            
             </div>
             <div v-else>
                 <div>
@@ -143,8 +142,11 @@
                             nombre:""
                         }
                     }],
-                    llamadas:[{
+                    llamadas:[{                        
                         id:0,
+                        usuario:{
+                            nombre:""
+                        },
                         nodoOrigen:{
                             nombre:""
                         },

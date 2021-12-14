@@ -34,7 +34,11 @@
                                 <td>{{(usuario.nivel == 0)?"Usuario":"Administrador"}}</td>
                                 <td>{{usuario.nodo.nombre}}</td>
                                 <td>{{usuario.grupo.nombre}}</td>
-                                <td><a :href="'editarUsuario.php?usuario='+usuario.id">Editar</a>                                
+                                <td>
+                                    <a :href="'editarUsuario.php?usuario='+usuario.id">Editar</a>
+                                    <button v-on:click="eliminarHorario(horario.id)">Eliminar</button>                                    
+                                </td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -42,8 +46,7 @@
                 <div>
                     <a href="home.php">Ver Llamadas</a></br>
                     <a href="listaUsuarios.php">Ver Usuarios</a></br>
-                    <a href="listaNodos.php">Ver Nodos</a></br>
-                    <a href="listaGrupos.php">Ver Grupos</a></br> 
+                    <a href="listaAlias.php">Ver Alias</a></br> 
                 </div>
             <div>               
         </div>

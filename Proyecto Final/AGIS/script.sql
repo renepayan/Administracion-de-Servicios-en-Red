@@ -61,3 +61,10 @@ CREATE TABLE tbl_Llamadas(
     FOREIGN KEY (NodoOrigen) REFERENCES tbl_Nodos(idNodo),
     FOREIGN KEY (NodoDestino) REFERENCES tbl_Nodos(idNodo)
 );
+CREATE TABLE tbl_Alias(
+  idAlias INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  tipoAlias INT NOT NULL,
+  Usuario INT NOT NULL,
+  Alias VARCHAR(50) NOT NULL,
+  FOREIGN KEY (Usuario) REFERENCES tbl_Usuarios(idUsuario)
+);
