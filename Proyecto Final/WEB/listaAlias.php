@@ -36,10 +36,11 @@
                     </table>
                 </div>
                 <div>
-                    Nuevo alias:
-                    Usuario: <input type="number" min="1" step="1" v-model="nuevoAlias.idUsuario"/>
-                    Alias: <input type="text" v-model="nuevoAlias.alias" />
-                    Tipo: <input type="number" min="0" max="10" step="1" v-mode="nuevoAlias.tipo"/>
+                    Nuevo alias:</br>
+                    Usuario: <input type="number" min="1" step="1" v-model="nuevoAlias.idUsuario"/></br>
+                    Alias: <input type="text" v-model="nuevoAlias.alias" /></br>
+                    Tipo: <input type="number" min="0" max="10" step="1" v-mode="nuevoAlias.tipo"/></br>
+                    <button v-on:click="agregar()">Agregar</button></br>
                 </div>
                 <div>
                     <a href="home.php">Ver Llamadas</a></br>
