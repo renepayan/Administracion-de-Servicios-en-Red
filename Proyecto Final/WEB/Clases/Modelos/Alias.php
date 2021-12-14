@@ -1,6 +1,6 @@
 <?php
     namespace PBX\Modelos;
-    class Grupo{
+    class Alias{
         private ?int $id;
         private int $tipoAlias;
         private Usuario $usuario;
