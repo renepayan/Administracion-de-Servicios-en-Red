@@ -7,9 +7,9 @@
     require_once '../Clases/Modelos/Grupo.php';
     require_once '../Clases/Modelos/PermisoLlamada.php';
     require_once '../Clases/Modelos/Alias.php';
-    
     require_once '../Clases/Modelos/HorarioDeServicio.php';
-    require_once '../Clases/Modelos/AliasDatos.php';
+    
+    require_once '../Clases/AliasDatos.php';
     require_once '../Clases/UsuarioDatos.php';
     require_once '../Clases/PermisoLlamadaDatos.php';
     require_once '../Clases/HorarioDeServicioDatos.php';
