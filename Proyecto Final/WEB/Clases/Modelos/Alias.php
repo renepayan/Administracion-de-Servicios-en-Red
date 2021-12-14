@@ -24,7 +24,12 @@
         public function setAlias(string $alias):void{
             $this->alias = $alias;
         }
-
+        public function getUsuario():Usuario{
+            return $this->usuario;
+        }
+        public function setUsuario(Usuario $usuario):void{
+            $this->usuario = $usuario; 
+        }
         public function getTipoAlias():int{
             return $this->tipoAlias;
         }
