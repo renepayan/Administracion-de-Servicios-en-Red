@@ -9,8 +9,8 @@
             if($pstmInsert = $conexion->prepare("INSERT INTO tbl_Alias (tipoAlias,Usuario,Alias) VALUES (?,?,?)")){
                 $usuario = $alias->getUsuario()->getId();
                 $tipoAlias = $alias->getTipoAlias();
-                $alias = $alias->getAlias();
-                $pstmInsert->bind_param("iis",$tipoAlias,$usuario,$alias);
+                $aliasSTR = $alias->getAlias();
+                $pstmInsert->bind_param("iis",$tipoAlias,$usuario,$aliasSTR);
                 $pstmInsert->execute();                
                 $idHorarioDeServicio = $pstmInsert->insert_id;
                 $pstmInsert->close();
