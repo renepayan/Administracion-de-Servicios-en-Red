@@ -28,7 +28,7 @@
             $sal["Estado"] = "error";
             $sal["Descripcion"] = "El usuario local no existe o no tiene los permisos";
         }else{
-            $usuario = PBX\AliasDatos::getAliasByAlias($conexion, $idUsuario);
+            $usuario = PBX\UsuarioDatos::getUsuarioById($conexion, $idUsuario);
             if($usuario == null){
                 $sal["Estado"] = "error";
                 $sal["Descripcion"] = "El usuario no existe";
