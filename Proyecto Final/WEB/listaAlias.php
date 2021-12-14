@@ -85,7 +85,7 @@
                             console.log(error);
                         });
                     },
-                    crear:function(){
+                    agregar:function(){
                         const params = new URLSearchParams();
                         params.append('idUsuario', this.nuevoAlias.idUsuario);
                         params.append('tipo', this.nuevoAlias.tipo);
