@@ -33,7 +33,7 @@
                 $sal["Estado"] = "error";
                 $sal["Descripcion"] = "El usuario no existe";
             }else{
-                $aliasEnDB = PBX\AliasDatos::getAliasByAlias($conexion, $idUsuario);
+                $aliasEnDB = PBX\AliasDatos::getAliasByAlias($conexion, $alias);
                 if($aliasEnDB != null){
                     $sal["Estado"] = "error";
                     $sal["Descripcion"] = "El alias ya existe";            
