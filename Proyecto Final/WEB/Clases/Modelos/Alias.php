@@ -8,7 +8,8 @@
         public function __construct(?int $id, int $tipoAlias, Usuario $usuario, string $alias){
             $this->id = $id;
             $this->usuario = $usuario;
-            $this->alias = $alias;            
+            $this->alias = $alias;    
+            $this->tipoAlias = $tipoAlias;        
         }
         public function getId():?int{
             return $this->id;
