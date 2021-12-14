@@ -36,6 +36,12 @@
                     </table>
                 </div>
                 <div>
+                    Nuevo alias:
+                    Usuario: <input type="number" min="1" step="1" v-model="nuevoAlias.idUsuario"/>
+                    Alias: <input type="text" v-model="nuevoAlias.alias" />
+                    Tipo: <input type="number" min="0" max="10" step="1" v-mode="nuevoAlias.tipo"/>
+                </div>
+                <div>
                     <a href="home.php">Ver Llamadas</a></br>
                     <a href="listaUsuarios.php">Ver Usuarios</a></br>                    
                 </div>
@@ -45,6 +51,11 @@
             var app = new Vue({
                 el: '#app',
                 data:{
+                    nuevoAlias:{
+                        idUsuario:0,
+                        tipo:0,
+                        alias:""
+                    },
                     aliases:[{
                         id:0,
                         tipoAlias:0,
@@ -55,6 +66,44 @@
                     }]                   
                 },
                 methods:{
+                    eliminar:function(id){
+                        const params = new URLSearchParams();
+                        params.append('idAlias', id);
+                        axios({
+                            method:"POST",
+                            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                            data: params,
+                            url: '/Controladores/eliminarAlias.php'})
+                        .then(function (response) {
+                            if(response.data.Estado === "ok")
+                                app.cargarInformacion();
+                            else
+                                alert(response.data.Descripcion);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    },
+                    crear:function(){
+                        const params = new URLSearchParams();
+                        params.append('idUsuario', this.nuevoAlias.idUsuario);
+                        params.append('tipo', this.nuevoAlias.tipo);
+                        params.append('alias', this.nuevoAlias.alias);
+                        axios({
+                            method:"POST",
+                            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                            data: params,
+                            url: '/Controladores/agregarAlias.php'})
+                        .then(function (response) {
+                            if(response.data.Estado === "ok")
+                                app.cargarInformacion();
+                            else
+                                alert(response.data.Descripcion);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    },
                     cargarInformacion: function(){
                         axios.get("/Controladores/obtenerAlias.php")
                         .then(function(response){
